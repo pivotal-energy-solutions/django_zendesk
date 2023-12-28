@@ -84,14 +84,15 @@ exclude = '''
   | dist
 )/
 '''
-extend-exclude = '''
-# A regex preceded with ^/ will apply only to files and directories
-# in the root of the project.
-/static/.py  # exclude a file named foo.py in the root of the project (in addition to the defaults)
-'''
+
+[tool.bandit]
+targets = ['django_zendesk']
+exclude_dirs = ["django_zendesk/tests"]
+skips = ["B303", "B324", "B113"]
 
 [tool.coverage.run]
 branch = true
+command_line = "demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk"
 omit = [
     "*/demo_app/**",
     "*/migrations/*",
@@ -105,3 +106,9 @@ skip_covered = true
 skip_empty = true
 ignore_errors = true
 sort = "cover"
+
+[tool.bumper]
+exclude = [".idea", ".github", "demo_app"]
+version_files = ["django_zendesk/__init__.py"]
+repo = "pivotal-energy-solutions/django_zendesk"
+report = "out.json"
