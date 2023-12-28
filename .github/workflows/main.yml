@@ -1,5 +1,3 @@
-# This is used for Registration
-
 name: Django Zendesk Checks
 
 on:
@@ -90,7 +88,7 @@ jobs:
           pip install .[test]
 
       - name: Bandit
-        run: bandit -c pyproject.toml -f json -o report.json .
+        run: bandit -c pyproject.toml -r -f json -o report.json .
 
       - name: Show report
         if: ${{ success() || failure() }}
