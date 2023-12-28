@@ -87,7 +87,7 @@ exclude = '''
 
 [tool.bandit]
 targets = ['django_zendesk']
-exclude_dirs = ["django_zendesk/tests"]
+exclude_dirs = ["django_zendesk/tests", "demo_app"]
 skips = ["B303", "B324", "B113"]
 
 [tool.coverage.run]
