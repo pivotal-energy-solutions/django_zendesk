@@ -10,7 +10,7 @@ jobs:
     name: Canceling Outstanding Jobs
     runs-on: ubuntu-latest
     steps:
-      - uses: styfle/cancel-workflow-action@0.11.0
+      - uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
 
@@ -18,8 +18,8 @@ jobs:
     name: Outdated packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: 'pip'
@@ -37,8 +37,8 @@ jobs:
     name: Black
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: 'pip'
@@ -56,8 +56,8 @@ jobs:
     name: Pre-Commit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: 'pip'
@@ -76,8 +76,8 @@ jobs:
     name: Bandit Security
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: 'pip'
@@ -96,7 +96,7 @@ jobs:
 
       - name: "Upload Coverage Results"
         if: ${{ success() || failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Bandit Security Report
           path: report.json
@@ -132,9 +132,9 @@ jobs:
           mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES" 2>&1 > /dev/null
           mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -V
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
@@ -153,7 +153,7 @@ jobs:
           DB_TYPE: ${{ matrix.db }}
         run: export PYTHONPATH=`pwd` && coverage run
       - name: "Upload Coverage Results for PY:${{ matrix.python-version }} DB:${{ matrix.db}} DJ:${{ matrix.django-version }}"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python-version }}-${{ matrix.db}}-${{ matrix.django-version }}
           path: .coverage
@@ -167,8 +167,8 @@ jobs:
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
@@ -177,7 +177,7 @@ jobs:
           pip install .
           pip install .[test]
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           path: .
 
@@ -204,10 +204,10 @@ jobs:
       bump_version: ${{ steps.release.outputs.bump_version }}
       bump_sha:  ${{ steps.release.outputs.bump_sha }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install dependencies
