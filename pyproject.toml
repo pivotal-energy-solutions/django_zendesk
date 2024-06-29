@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -7,7 +7,7 @@ name = "pivotal-django-zendesk"
 dynamic = ["version"]
 description = "Provides single-sign on functionality between a django.contrib.auth based site and Zendesk"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 authors = [
     { name = "Pivotal Energy Solutions", email = "steve@pivotal.energy" },
 ]
@@ -25,9 +25,6 @@ classifiers = [
     "License :: Other/Proprietary License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Utilities",
@@ -56,7 +53,7 @@ Homepage = "https://github.com/pivotal-energy-solutions/django_zendesk"
 "Say Thanks!" = "https://saythanks.io/to/rh0dium"
 
 [tool.hatch.version]
-path = "django_zendesk/__init__.py"
+source = "vcs"
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -73,17 +70,11 @@ include = [
 line-length = 100
 target-version = ['py311']
 include = '\.pyi?$'
-exclude = '''
-/(
-    \.git
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | build
-  | dist
-)/
-'''
+exclude = '(\.git|.venv|_build|build|dist|.*\/__pycache__\/)'
+
+[tool.ruff]
+line-length = 100
+lint.ignore = ["F401"]
 
 [tool.bandit]
 targets = ['django_zendesk']
