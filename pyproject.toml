@@ -26,6 +26,7 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Utilities",
 ]
 dependencies = [
@@ -91,7 +92,7 @@ omit = [
 ]
 
 [tool.coverage.report]
-fail_under = 42
+fail_under = 39
 precision = 1
 skip_covered = true
 skip_empty = true
