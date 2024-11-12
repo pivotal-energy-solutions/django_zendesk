@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """models.py: Zendesk models"""
 
 from __future__ import print_function

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 ASGI config for demo_app project.
 
